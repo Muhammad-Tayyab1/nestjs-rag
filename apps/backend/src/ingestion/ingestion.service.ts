@@ -67,7 +67,7 @@ export class IngestionService {
     const doc = docs.find((d) => d.documentId === documentId);
     if (!doc) throw new NotFoundException(`Document ${documentId} not found`);
 
-    await this.vectorStoreService.deleteByDocumentId(documentId, doc.chunks);
+    await this.vectorStoreService.deleteByDocumentId(documentId);
     this.vectorStoreService.removeDocument(documentId);
   }
 

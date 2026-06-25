@@ -69,10 +69,10 @@ export class VectorStoreService {
     }
   }
 
-  async deleteByDocumentId(documentId: string, chunkCount: number): Promise<void> {
+  async deleteByDocumentId(documentId: string): Promise<void> {
     try {
-      const ids = Array.from({ length: chunkCount }, (_, i) => `${documentId}-${i}`);
-      await this.index.deleteMany(ids);
+      // Use filter-based delete — more robust than reconstructed IDs
+      await (this.index as any).deleteMany({ filter: { documentId: { '$eq': documentId } } });
     } catch {
       throw new BadGatewayException('Vector store unavailable. Please try again.');
     }
