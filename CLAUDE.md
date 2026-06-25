@@ -15,6 +15,7 @@ Full-stack RAG (Retrieval-Augmented Generation) system. NestJS backend + Next.js
 ## Required Environment Variables
 
 Backend (`apps/backend/.env`):
+
 ```
 GROQ_API_KEY=
 PINECONE_API_KEY=
@@ -24,6 +25,7 @@ PORT=3001
 ```
 
 Frontend (`apps/frontend/.env.local`):
+
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
@@ -88,14 +90,14 @@ GET    /api/health               { status: 'ok', timestamp }
 
 All errors return: `{ statusCode, message, timestamp }` via global `HttpExceptionFilter`.
 
-| Scenario | Code |
-|---|---|
-| Unsupported file type | 400 |
-| Empty question | 400 |
-| File > 10MB | 413 |
-| HuggingFace down | 502 |
-| Pinecone down | 502 |
-| Groq down | 502 |
+| Scenario              | Code |
+| --------------------- | ---- |
+| Unsupported file type | 400  |
+| Empty question        | 400  |
+| File > 10MB           | 413  |
+| HuggingFace down      | 502  |
+| Pinecone down         | 502  |
+| Groq down             | 502  |
 
 ## Testing
 

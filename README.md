@@ -4,13 +4,13 @@ A full-stack RAG system built with NestJS and Next.js. Upload any document and a
 
 ## Stack
 
-| Layer | Technology |
-|---|---|
-| Backend | NestJS (Node.js) |
-| Frontend | Next.js 14 + Tailwind CSS |
-| LLM | Groq — `llama-3.3-70b-versatile` |
+| Layer      | Technology                                             |
+| ---------- | ------------------------------------------------------ |
+| Backend    | NestJS (Node.js)                                       |
+| Frontend   | Next.js 14 + Tailwind CSS                              |
+| LLM        | Groq — `llama-3.3-70b-versatile`                       |
 | Embeddings | HuggingFace — `sentence-transformers/all-MiniLM-L6-v2` |
-| Vector DB | Pinecone (serverless, free tier) |
+| Vector DB  | Pinecone (serverless, free tier)                       |
 
 ---
 
@@ -34,11 +34,11 @@ You need three free accounts. No credit card required for any of them.
 2. Click **Sign Up Free** → create account
 3. Once logged in, click **Create Index** in the dashboard
 4. Fill in the form:
-   - **Index name:** `nestjs-rag`
-   - **Dimensions:** `384`
-   - **Metric:** `Cosine`
-   - **Cloud provider:** Any (AWS us-east-1 is fine)
-   - **Plan:** Free (Serverless)
+    - **Index name:** `nestjs-rag`
+    - **Dimensions:** `384`
+    - **Metric:** `Cosine`
+    - **Cloud provider:** Any (AWS us-east-1 is fine)
+    - **Plan:** Free (Serverless)
 5. Click **Create Index** — wait ~30 seconds for it to be ready
 6. In the left sidebar click **API Keys**
 7. Copy the **default** API key
@@ -166,13 +166,13 @@ QUERY
 
 ## API Endpoints
 
-| Method | Path | Description | Body |
-|---|---|---|---|
-| `POST` | `/api/ingestion/upload` | Upload a document | `multipart/form-data` — field: `file` |
-| `GET` | `/api/ingestion/documents` | List all ingested documents | — |
-| `DELETE` | `/api/ingestion/:id` | Remove a document | — |
-| `POST` | `/api/chat/query` | Ask a question | `{ "question": "..." }` |
-| `GET` | `/api/health` | Health check | — |
+| Method   | Path                       | Description                 | Body                                  |
+| -------- | -------------------------- | --------------------------- | ------------------------------------- |
+| `POST`   | `/api/ingestion/upload`    | Upload a document           | `multipart/form-data` — field: `file` |
+| `GET`    | `/api/ingestion/documents` | List all ingested documents | —                                     |
+| `DELETE` | `/api/ingestion/:id`       | Remove a document           | —                                     |
+| `POST`   | `/api/chat/query`          | Ask a question              | `{ "question": "..." }`               |
+| `GET`    | `/api/health`              | Health check                | —                                     |
 
 ---
 
@@ -190,21 +190,26 @@ npx jest
 ## Troubleshooting
 
 **Upload fails with 502**
+
 - Check your `HUGGINGFACE_API_KEY` or `PINECONE_API_KEY` in `.env`
 - Verify the Pinecone index `nestjs-rag` exists with 384 dimensions and cosine metric
 
 **Chat returns 502**
+
 - Check your `GROQ_API_KEY` in `.env`
 - Make sure the backend is still running (`npm run dev:backend`)
 
 **Frontend can't reach backend**
+
 - Confirm `NEXT_PUBLIC_API_URL=http://localhost:3001` in `apps/frontend/.env.local`
 - Confirm the backend is running on port 3001
 
 **"No documents in knowledge base"**
+
 - Upload a document first before asking questions
 
 **HuggingFace embedding is slow**
+
 - The free HuggingFace Inference API cold-starts. First request after inactivity may take 10–20 seconds. Subsequent requests are fast.
 
 ---
@@ -235,5 +240,5 @@ nestjs-rag/
 ⚠️ **CORS is currently set to `*`** for development convenience. Before deploying to production, restrict CORS to your frontend domain in `apps/backend/src/main.ts`:
 
 ```ts
-app.enableCors({ origin: 'https://your-frontend-domain.com' });
+app.enableCors({origin: 'https://your-frontend-domain.com'})
 ```
